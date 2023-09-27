@@ -16,12 +16,14 @@ window.onload = function () {
         let coordinates = canvas.getBoundingClientRect();
         x = Math.floor((e.x - coordinates.left - 5) / 100);
         y = Math.floor((e.y - coordinates.top - 5) / 100);
-        squares[x * 8 + y].place(turn);
-        if (turn == "black")
-            turn = "white";
-        else
-            turn = "black";
-        canvas.style.borderColor = turn;
+        if(squares[x * 8 + y].place(turn)){
+            if (turn == "black")
+                turn = "white";
+            else
+                turn = "black";
+            canvas.style.borderColor = turn;
+        }
+        
     }
 }
 
@@ -47,7 +49,10 @@ class Square {
             this.ctx.fill();
             this.color = color;
             this.check();
+            return true;
         }
+        else 
+            return false;
     }
 
     check() {
