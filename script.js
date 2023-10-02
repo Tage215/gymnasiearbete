@@ -57,18 +57,35 @@ class Square {
     }
 
     check(squares) {
-        let surrounding = this.checkSurrounding(squares);
+        let enemies = this.checkEnemies(squares, this.x, this.y);
+        
     }
 
-    checkSurrounding(squares) {
-        let surrounding = new Map();
-    
+    checkEnemies(squares, x, y) {
+        let enemies = [];
+        let index = 0;
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
-                surrounding.set((i + 1) * 3 + j + 1, squares[this.x + j + (this.y + i) * 8].color);
+                let square = x + j + (y + i) * 8;
+                if(square >= 0 && square < 64) {
+                    if(squares[square].color == this.enemyColor()){
+                        enemies[index] = square;
+                        index++;
+                    }
+                }
             }
         }
-        
-        return surrounding;
+        return enemies;
     }
+
+    enemyColor(){
+        if (this.color == "black")
+            return "white";
+        if (this.color == "white")
+            return "black"
+        
+        return "none"
+    }
+
+    
 }
