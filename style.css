@@ -10,3 +10,14 @@
 body{
     background-color: green;
 }
+
+.count{
+    font-size: 10rem;
+    position:absolute;
+    left: 15rem;
+}
+
+#whiteCount{
+    color: white;
+    top: 10rem;
+}
