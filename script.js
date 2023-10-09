@@ -14,6 +14,7 @@ window.onload = function () {
 
     let white = 2;
     let black = 2;
+    document.getElementById("whiteBar").style.left = canvas.getBoundingClientRect().left + "px";
 
     let turn = "black";
     canvas.onclick = function (e) {
@@ -35,11 +36,9 @@ window.onload = function () {
                 else if(squares[i].color == "black")
                     black++;
             }
-            document.getElementById("whiteCount").innerHTML = white;
-            document.getElementById("blackCount").innerHTML = black;
+            document.getElementById("whiteBar").style.width = (white / (black+white) * 800) + "px";
 
-            turn = switchTurn(turn);
-            checkTurnOver(gridSize, squares, turn);
+            turn = checkTurnOver(gridSize, squares, turn);
         }
     }
 }
@@ -50,7 +49,8 @@ function checkTurnOver(gridSize, squares, turn) {
     for (let i = 0; i < gridSize; i++) {
         temp = squares[i].check(squares, turn);
         if (temp.length > 0) {
-            return;
+            turn = switchTurn(turn);
+            return turn;
         }
     }
 
@@ -59,9 +59,10 @@ function checkTurnOver(gridSize, squares, turn) {
     for (let i = 0; i < gridSize; i++) {
         temp = squares[i].check(squares, turn);
         if (temp.length > 0) {
-            return;
+            return turn;
         }
     }
+
     gameOver();
 }
 
@@ -71,6 +72,7 @@ function switchTurn(turn) {
     else
         turn = "black";
 
+    document.getElementById("canvas").style.borderColor = turn;
     return turn;
 }
 

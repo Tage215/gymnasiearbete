@@ -2,7 +2,7 @@
     position:absolute;
     top:50%;
     left:50%;;
-    transform:translate(-50%, -50%);
+    transform:translate(-50%, -45%);
     background-color: darkgreen;
     border: 5px solid black;
 }
@@ -20,4 +20,24 @@ body{
 #whiteCount{
     color: white;
     top: 10rem;
+}
+
+.bar{
+    width: 50rem;
+    height: 1.5rem;
+    position:absolute;
+    top:5%;
+    left:50%;;
+    background-color: black;
+}
+
+#blackBar{
+    transform:translate(-50%);
+
+}
+
+#whiteBar{
+    background-color: white;
+    width: 25rem;
+
 }
