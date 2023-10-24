@@ -23,7 +23,7 @@ body{
 }
 
 .bar{
-    width: 50rem;
+    width: 800px;
     height: 1.5rem;
     position:absolute;
     top:5%;
@@ -38,6 +38,10 @@ body{
 
 #whiteBar{
     background-color: white;
-    width: 25rem;
+    width: 400px;
+}
 
+#winscreen{
+    font-size: 5rem;
+    display:none;
 }

@@ -14,7 +14,7 @@ window.onload = function () {
 
     let white = 2;
     let black = 2;
-    document.getElementById("whiteBar").style.left = canvas.getBoundingClientRect().left + "px";
+    document.getElementById("whiteBar").style.left = canvas.getBoundingClientRect().left + 5 + "px";
 
     let turn = "black";
     canvas.onclick = function (e) {
@@ -30,26 +30,26 @@ window.onload = function () {
 
             white = 0;
             black = 0;
-            for(let i = 0; i < gridSize; i++){
-                if(squares[i].color == "white")
+            for (let i = 0; i < gridSize; i++) {
+                if (squares[i].color == "white")
                     white++
-                else if(squares[i].color == "black")
+                else if (squares[i].color == "black")
                     black++;
             }
-            document.getElementById("whiteBar").style.width = (white / (black+white) * 800) + "px";
+            document.getElementById("whiteBar").style.width = (white / (black + white) * 800) + "px";
 
-            turn = checkTurnOver(gridSize, squares, turn);
+            turn = checkTurnOver(gridSize, squares, turn, white, black);
         }
     }
 }
 
-function checkTurnOver(gridSize, squares, turn) {
+function checkTurnOver(gridSize, squares, turn, white, black) {
     let temp = "";
+    turn = switchTurn(turn);
 
     for (let i = 0; i < gridSize; i++) {
         temp = squares[i].check(squares, turn);
         if (temp.length > 0) {
-            turn = switchTurn(turn);
             return turn;
         }
     }
@@ -63,7 +63,7 @@ function checkTurnOver(gridSize, squares, turn) {
         }
     }
 
-    gameOver();
+    gameOver(white, black);
 }
 
 function switchTurn(turn) {
@@ -76,6 +76,22 @@ function switchTurn(turn) {
     return turn;
 }
 
+function gameOver(white, black) {
+    winscreen = document.getElementById("winscreen");
+    if (black > white) {
+        winscreen.innerHTML = "Black wins!";
+        winscreen.style.color = "black";
+    }
+    else if(white > black) {
+        winscreen.innerHTML = "White wins!";
+        winscreen.style.color = "white";
+    }
+    else {
+        winscreen.innerHTML = "Draw!"
+        winscreen.style.color = "gray";
+    }
+    winscreen.style.display = "block";
+}
 
 class Square {
     constructor(ctx, x, y) {
