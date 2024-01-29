@@ -7,10 +7,11 @@ window.onload = function () {
     for (let i = 0; i < gridSize; i++) {
         squares[i] = new Square(ctx, i % 8, Math.floor(i / 8));
     }
-    squares[27].draw("white", squares);
-    squares[28].draw("black", squares);
-    squares[35].draw("black", squares);
-    squares[36].draw("white", squares);
+
+    squares[27].draw("white");
+    squares[28].draw("black");
+    squares[35].draw("black");
+    squares[36].draw("white");
 
     let white = 2;
     let black = 2;
@@ -82,7 +83,7 @@ function gameOver(white, black) {
         winscreen.innerHTML = "Black wins!";
         winscreen.style.color = "black";
     }
-    else if(white > black) {
+    else if (white > black) {
         winscreen.innerHTML = "White wins!";
         winscreen.style.color = "white";
     }
@@ -99,15 +100,25 @@ class Square {
         this.x = x;
         this.y = y;
         this.size = 100;
+        this.animationframes = 10;
         this.color = "none";
         this.ctx.strokeRect(this.x * 100, this.y * 100, this.size, this.size);
     }
 
     draw(color) {
-        this.ctx.fillStyle = color;
-        this.ctx.beginPath();
-        this.ctx.arc(this.x * 100 + 50, this.y * 100 + 50, this.size / 2, 0, 2 * Math.PI);
-        this.ctx.fill();
+        let i = this.animationframes;
+        let interval = setInterval(function() {
+            this.ctx.fillStyle = color;
+            this.ctx.beginPath();
+            this.ctx.arc(this.x * 100 + 50, this.y * 100 + 50, this.size / (2 * i), 0, 2 * Math.PI);
+            this.ctx.fill();
+            i--;
+            console.log(i);
+            if (i <= 0) {
+                clearInterval(interval);
+            }
+        }.bind(this), 300 / this.animationframes);
+
         this.color = color;
     }
 
