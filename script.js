@@ -117,7 +117,7 @@ class Square {
             if (i <= 0) {
                 clearInterval(interval);
             }
-        }.bind(this), 300 / this.animationframes);
+        }.bind(this), 500 / this.animationframes);
 
         this.color = color;
     }
