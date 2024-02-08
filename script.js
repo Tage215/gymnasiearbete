@@ -113,7 +113,6 @@ class Square {
             this.ctx.arc(this.x * 100 + 50, this.y * 100 + 50, this.size / (2 * i), 0, 2 * Math.PI);
             this.ctx.fill();
             i--;
-            console.log(i);
             if (i <= 0) {
                 clearInterval(interval);
             }
