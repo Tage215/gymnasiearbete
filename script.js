@@ -15,10 +15,10 @@ window.onload = function () {
 
     let white = 2;
     let black = 2;
-    document.getElementById("whiteBar").style.left = canvas.getBoundingClientRect().left + 5 + "px";
+    document.getElementById("whiteBar").style.left = canvas.getBoundingClientRect().left + 5 + "px";    
 
     let turn = "black";
-    canvas.onclick = function (e) {
+    canvas.onclick = (e) => {
         let coordinates = canvas.getBoundingClientRect();
         let x = Math.floor((e.x - coordinates.left - 5) / 100);
         let y = Math.floor((e.y - coordinates.top - 5) / 100);
